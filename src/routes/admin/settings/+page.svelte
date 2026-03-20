@@ -69,7 +69,7 @@
 	</div>
 
 	<!-- ABOUT -->
-	<h2 style={sectionHeadingStyle}>About Section</h2>
+	<h2 style={sectionHeadingStyle}>About — Profile</h2>
 
 	<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
 		<div>
@@ -77,16 +77,55 @@
 			<input type="text" id="aboutName" name="aboutName" value={c.aboutName} style={inputStyle} />
 		</div>
 		<div>
-			<label for="aboutLabel" style={labelStyle}>About Label</label>
-			<input
-				type="text"
-				id="aboutLabel"
-				name="aboutLabel"
-				value={c.aboutLabel}
-				style={inputStyle}
-			/>
+			<label for="aboutRole" style={labelStyle}>Role / Title</label>
+			<input type="text" id="aboutRole" name="aboutRole" value={c.aboutRole} style={inputStyle} />
 		</div>
 	</div>
+
+	<div>
+		<label for="aboutIntro" style={labelStyle}>Intro (1-2 sentences, shown prominently)</label>
+		<textarea id="aboutIntro" name="aboutIntro" rows="2" style={textareaStyle}>{c.aboutIntro}</textarea>
+	</div>
+
+	<div>
+		<label for="aboutLabel" style={labelStyle}>About Label (homepage strip)</label>
+		<input type="text" id="aboutLabel" name="aboutLabel" value={c.aboutLabel} style={inputStyle} />
+	</div>
+
+	<h2 style={sectionHeadingStyle}>About — Education</h2>
+	<p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-bottom:0.8rem;">One entry per line. Format: Degree | Institution | Year</p>
+	<div>
+		<label for="education" style={labelStyle}>Education Entries</label>
+		<textarea id="education" name="education" rows="4" style={textareaStyle}>{c.education.join('\n')}</textarea>
+	</div>
+
+	<h2 style={sectionHeadingStyle}>About — Certifications</h2>
+	<p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-bottom:0.8rem;">One per line</p>
+	<div>
+		<label for="certifications" style={labelStyle}>Certifications</label>
+		<textarea id="certifications" name="certifications" rows="3" style={textareaStyle}>{c.certifications.join('\n')}</textarea>
+	</div>
+
+	<h2 style={sectionHeadingStyle}>About — Skills & Tools</h2>
+	<p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-bottom:0.8rem;">One category per line. Format: Category: Skill1, Skill2, Skill3</p>
+	<div>
+		<label for="skillCategoriesRaw" style={labelStyle}>Skill Categories</label>
+		<textarea id="skillCategoriesRaw" name="skillCategoriesRaw" rows="4" style={textareaStyle}>{c.skillCategories.map(sc => sc.label + ': ' + sc.items.join(', ')).join('\n')}</textarea>
+	</div>
+
+	<h2 style={sectionHeadingStyle}>About — Research</h2>
+	<p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-bottom:0.8rem;">One highlight per line</p>
+	<div>
+		<label for="researchHighlights" style={labelStyle}>Research Highlights</label>
+		<textarea id="researchHighlights" name="researchHighlights" rows="4" style={textareaStyle}>{c.researchHighlights.join('\n')}</textarea>
+	</div>
+
+	<div>
+		<label for="writingPhilosophy" style={labelStyle}>Writing Philosophy</label>
+		<textarea id="writingPhilosophy" name="writingPhilosophy" rows="3" style={textareaStyle}>{c.writingPhilosophy}</textarea>
+	</div>
+
+	<h2 style={sectionHeadingStyle}>Homepage About Strip</h2>
 
 	<div>
 		<label for="aboutBio1" style={labelStyle}>Bio Paragraph 1</label>
@@ -104,7 +143,7 @@
 	</div>
 
 	<div>
-		<label for="skillChips" style={labelStyle}>Skill Chips (comma-separated)</label>
+		<label for="skillChips" style={labelStyle}>Homepage Skill Chips (comma-separated)</label>
 		<input
 			type="text"
 			id="skillChips"

@@ -10,6 +10,27 @@ export const load: PageServerLoad = async ({ parent }) => {
 	return { config };
 };
 
+function parseLines(raw: string): string[] {
+	return raw
+		.split('\n')
+		.map((s) => s.trim())
+		.filter(Boolean);
+}
+
+function parseSkillCategories(raw: string): { label: string; items: string[] }[] {
+	return parseLines(raw).map((line) => {
+		const colonIdx = line.indexOf(':');
+		if (colonIdx === -1) return { label: 'Other', items: [line] };
+		const label = line.slice(0, colonIdx).trim();
+		const items = line
+			.slice(colonIdx + 1)
+			.split(',')
+			.map((s) => s.trim())
+			.filter(Boolean);
+		return { label, items };
+	});
+}
+
 export const actions: Actions = {
 	default: async ({ request, platform }) => {
 		const db = createDb(platform!.env.DB);
@@ -25,6 +46,18 @@ export const actions: Actions = {
 
 			aboutLabel: formData.get('aboutLabel')?.toString() ?? defaultConfig.aboutLabel,
 			aboutName: formData.get('aboutName')?.toString() ?? defaultConfig.aboutName,
+			aboutRole: formData.get('aboutRole')?.toString() ?? defaultConfig.aboutRole,
+			aboutIntro: formData.get('aboutIntro')?.toString() ?? defaultConfig.aboutIntro,
+
+			education: parseLines(formData.get('education')?.toString() ?? ''),
+			certifications: parseLines(formData.get('certifications')?.toString() ?? ''),
+			researchHighlights: parseLines(formData.get('researchHighlights')?.toString() ?? ''),
+			writingPhilosophy:
+				formData.get('writingPhilosophy')?.toString() ?? defaultConfig.writingPhilosophy,
+			skillCategories: parseSkillCategories(
+				formData.get('skillCategoriesRaw')?.toString() ?? ''
+			),
+
 			aboutBio1: formData.get('aboutBio1')?.toString() ?? defaultConfig.aboutBio1,
 			aboutBio2: formData.get('aboutBio2')?.toString() ?? defaultConfig.aboutBio2,
 			aboutBio3: formData.get('aboutBio3')?.toString() ?? defaultConfig.aboutBio3,
@@ -51,7 +84,6 @@ export const actions: Actions = {
 
 		const jsonData = JSON.stringify(config);
 
-		// Upsert: try update first, insert if no rows affected
 		const existing = await db.select().from(siteConfig).limit(1);
 		if (existing.length > 0) {
 			await db.update(siteConfig).set({ data: jsonData }).where(eq(siteConfig.id, 1));
