@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { authClient } from '$lib/auth-client';
 
 	let email = $state('');
@@ -12,18 +12,26 @@
 		errorMessage = '';
 		loading = true;
 
-		const { error } = await authClient.signIn.email({
-			email,
-			password
-		});
+		try {
+			const result = await authClient.signIn.email({
+				email,
+				password,
+				callbackURL: '/admin'
+			});
 
-		if (error) {
-			errorMessage = error.message || 'Invalid credentials';
+			if (result.error) {
+				errorMessage = result.error.message || 'Invalid credentials';
+				loading = false;
+				return;
+			}
+
+			// Invalidate all server load functions so they pick up the new session
+			await invalidateAll();
+			goto('/admin');
+		} catch (e) {
+			errorMessage = 'Something went wrong. Please try again.';
 			loading = false;
-			return;
 		}
-
-		goto('/admin');
 	}
 </script>
 
@@ -31,7 +39,9 @@
 	<title>Login — FiscalProse</title>
 </svelte:head>
 
-<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--cream);">
+<div
+	style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--cream);"
+>
 	<div style="width:100%;max-width:400px;padding:2rem;">
 		<div style="text-align:center;margin-bottom:2.5rem;">
 			<h1 class="site-title" style="font-size:2.5rem;">
