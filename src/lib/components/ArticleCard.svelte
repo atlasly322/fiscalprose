@@ -27,7 +27,7 @@
 	const delayClass = $derived(delay === 1 ? 'delay-1' : delay === 2 ? 'delay-2' : '');
 </script>
 
-<a href="/blog/{slug}" class="article-card animate {delayClass}">
+<a href="/blog/{slug}" class="article-card animate {delayClass}" title="Click to read full article">
 	<p class="card-category">{category}</p>
 	<h3 class="card-title">{title}</h3>
 	<p class="card-excerpt">{excerpt}</p>

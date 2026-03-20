@@ -20,7 +20,7 @@
 			<div class="hero-text">
 				<span class="hero-badge">&#10022; {config.heroBadgeText}</span>
 				<h2>
-					<a href="/blog/{heroPost.slug}" style="text-decoration:none;color:inherit;"
+					<a href="/blog/{heroPost.slug}" style="text-decoration:none;color:inherit;" title="Click to read full article"
 						>{heroPost.title}</a
 					>
 				</h2>
