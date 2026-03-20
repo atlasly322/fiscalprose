@@ -39,12 +39,16 @@
 		<input type="hidden" id="editor-content" name="content" value={editorHtml} />
 	</div>
 
-	<div style="display:flex;gap:2rem;align-items:center;">
-		<label style="display:flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--slate);cursor:pointer;">
+	<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;align-items:end;">
+		<div>
+			<label for="publishedAt" style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.4rem;">Publish Date</label>
+			<input type="date" id="publishedAt" name="publishedAt" value={data.article.publishedAt ? new Date(data.article.publishedAt).toISOString().split('T')[0] : ''} style="width:100%;padding:0.75rem 1rem;border:1px solid var(--rule);background:var(--parchment);font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--ink);" />
+		</div>
+		<label style="display:flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--slate);cursor:pointer;padding-bottom:0.75rem;">
 			<input type="checkbox" name="featured" checked={data.article.featured} />
 			Featured
 		</label>
-		<label style="display:flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--slate);cursor:pointer;">
+		<label style="display:flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--slate);cursor:pointer;padding-bottom:0.75rem;">
 			<input type="checkbox" name="published" checked={data.article.published} />
 			Published
 		</label>

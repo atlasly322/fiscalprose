@@ -31,6 +31,7 @@ export const actions: Actions = {
 		const category = formData.get('category')?.toString() ?? 'Personal Finance';
 		const featured = formData.get('featured') === 'on';
 		const published = formData.get('published') === 'on';
+		const publishedAtStr = formData.get('publishedAt')?.toString() ?? '';
 
 		if (!title) {
 			return fail(400, { message: 'Title is required' });
@@ -39,6 +40,7 @@ export const actions: Actions = {
 		const slug = slugify(title);
 		const wordCount = countWords(content);
 		const readTime = estimateReadTime(wordCount);
+		const publishedAt = publishedAtStr ? new Date(publishedAtStr) : published ? new Date() : null;
 
 		await db.insert(post).values({
 			title,
@@ -50,7 +52,7 @@ export const actions: Actions = {
 			wordCount,
 			featured,
 			published,
-			publishedAt: published ? new Date() : null
+			publishedAt
 		});
 
 		redirect(302, '/admin');

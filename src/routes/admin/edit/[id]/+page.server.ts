@@ -49,6 +49,7 @@ export const actions: Actions = {
 		const category = formData.get('category')?.toString() ?? 'Personal Finance';
 		const featured = formData.get('featured') === 'on';
 		const published = formData.get('published') === 'on';
+		const publishedAtStr = formData.get('publishedAt')?.toString() ?? '';
 
 		if (!title) {
 			return fail(400, { message: 'Title is required' });
@@ -57,14 +58,7 @@ export const actions: Actions = {
 		const slug = slugify(title);
 		const wordCount = countWords(content);
 		const readTime = estimateReadTime(wordCount);
-
-		// Get current post to check publish state
-		const current = await db
-			.select()
-			.from(post)
-			.where(eq(post.id, params.id))
-			.limit(1)
-			.then((rows) => rows[0]);
+		const publishedAt = publishedAtStr ? new Date(publishedAtStr) : null;
 
 		await db
 			.update(post)
@@ -78,7 +72,7 @@ export const actions: Actions = {
 				wordCount,
 				featured,
 				published,
-				publishedAt: published && !current?.publishedAt ? new Date() : current?.publishedAt,
+				publishedAt,
 				updatedAt: new Date()
 			})
 			.where(eq(post.id, params.id));
