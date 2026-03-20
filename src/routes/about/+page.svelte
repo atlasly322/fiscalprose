@@ -41,6 +41,9 @@
 					<div style="font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.3rem;">
 						{parts[1]}{#if parts[2]} &nbsp;·&nbsp; {parts[2]}{/if}
 					</div>
+					{#if parts[3]}
+						<div style="font-size:0.88rem;color:var(--slate);margin-top:0.5rem;line-height:1.6;">{parts[3]}</div>
+					{/if}
 				</div>
 			{/each}
 		</div>

@@ -12,7 +12,7 @@ export interface SiteConfig {
 	aboutRole: string;
 	aboutIntro: string;
 
-	// About — Education (pipe-separated entries: "Degree | Institution | Year")
+	// About — Education (pipe-separated: "Degree | Institution | Year | Details")
 	education: string[];
 
 	// About — Certifications
@@ -21,10 +21,10 @@ export interface SiteConfig {
 	// About — Research highlights
 	researchHighlights: string[];
 
-	// About — Writing philosophy (short paragraph)
+	// About — Writing philosophy
 	writingPhilosophy: string;
 
-	// About — Tools & Skills (categorized: "Category: Skill1, Skill2")
+	// About — Skills (categorized: "Category: Skill1, Skill2")
 	skillCategories: { label: string; items: string[] }[];
 
 	// Legacy skill chips (homepage strip)
@@ -62,52 +62,57 @@ export const defaultConfig: SiteConfig = {
 
 	aboutLabel: 'About the Author',
 	aboutName: 'Aman Verma',
-	aboutRole: 'Finance Writer & Economics Graduate',
+	aboutRole: 'MSc Economics · Researcher · Finance Writer',
 	aboutIntro:
 		'I write about personal finance, markets, and economic policy with the same rigour I apply to academic research — grounded in data, free of jargon, and useful to the reader.',
 
 	education: [
-		'Postgraduate Certificate in Economics | University of Warwick | 2024',
-		'B.A. (Hons) Economics | Maharaja Agrasen Institute of Management Studies | 2023'
+		'MSc Economics and International Financial Economics | University of Warwick | 2024–2025 | Econometrics, International Trade, International Financial Management, Investment and the Financial System',
+		'B.A. Economics (Hons) | Maharaja Agrasen Institute of Management Studies, Delhi | 2020–2023 | CGPA: 8.36'
 	],
 
 	certifications: [
 		'Bloomberg Finance Fundamentals',
 		'NISM Equity Derivatives',
-		'Financial Modelling & Valuation'
+		'Financial Modeling and Valuation'
 	],
 
 	researchHighlights: [
-		'Dissertation quantifying tariff-driven trade diversion across four countries',
-		'Research paper on currencies as an institutional asset class',
-		'Analysis of financial crises and currency market dynamics'
+		'Trade Diversion and Third-Party Gains in Trade and FDI: Evidence from the U.S.–China Trade War (2018–2019) — MSc Dissertation using triple-difference and difference-in-differences frameworks across Malaysia, Vietnam, and Mexico',
+		'Research Paper on the Asian Financial Crisis 1997 — causes, impact, resolutions, and insights into economic crisis management and policy formulation',
+		'Research on currencies as an institutional asset class'
 	],
 
 	writingPhilosophy:
 		'Finance writing should respect the reader. That means no unnecessary jargon, no clickbait, and no hedging behind vague language. Every claim should have a source, every number should have context, and every article should leave the reader better informed than before.',
 
 	skillCategories: [
-		{ label: 'Analysis', items: ['Bloomberg Terminal', 'Financial Modelling', 'Equity Research'] },
-		{ label: 'Data & Tools', items: ['Python', 'Stata', 'Excel', 'SQL'] },
 		{
-			label: 'Writing',
+			label: 'Research & Analysis',
+			items: ['Econometrics', 'Financial Modelling', 'Data Analysis', 'Equity Research']
+		},
+		{ label: 'Tools & Data', items: ['Bloomberg Terminal', 'Python', 'Stata', 'Excel', 'SQL'] },
+		{
+			label: 'Writing & Communication',
 			items: ['Long-form Finance', 'Explainers', 'Policy Analysis', 'Data Journalism']
-		}
+		},
+		{ label: 'Languages', items: ['English (Professional)', 'Hindi (Native)'] }
 	],
 
 	skillChips: [
-		'Bloomberg Terminal',
+		'Warwick MSc',
+		'Bloomberg',
 		'NISM Certified',
 		'Financial Modelling',
+		'Econometrics',
 		'Python',
-		'Stata',
-		'Excel'
+		'Stata'
 	],
 
 	aboutBio1:
-		'I am an economics graduate with a B.A. (Hons) in Economics from Maharaja Agrasen Institute of Management Studies and a Postgraduate Certificate in Economics from the University of Warwick. I hold certifications in Bloomberg Finance Fundamentals, NISM Equity Derivatives, and Financial Modelling.',
+		'MSc in Economics and International Financial Economics from the University of Warwick. B.A. Economics (Hons) from MAIMS, Delhi. Bloomberg and NISM certified.',
 	aboutBio2:
-		'My academic work spans trade economics, currency markets, and financial crises — including a dissertation quantifying tariff-driven trade diversion across four countries and a research paper on currencies as an institutional asset class.',
+		'Research spans trade economics, currency markets, and financial crises — including a dissertation on tariff-driven trade diversion in the U.S.–China trade war using triple-difference frameworks.',
 	aboutBio3:
 		'I write about personal finance and markets with the same rigour I apply to research — grounded in data, free of jargon, and useful to the reader.',
 
@@ -116,7 +121,7 @@ export const defaultConfig: SiteConfig = {
 	ctaDescription:
 		"Available for freelance articles, content strategy, brand editorial, and ongoing retainers. Let's build something credible together.",
 	contactEmail: 'aman.verma235232@gmail.com',
-	linkedinUrl: 'https://www.linkedin.com/in/aman455',
+	linkedinUrl: 'https://www.linkedin.com/in/aman455/',
 
 	heroBadgeText: 'Featured',
 
