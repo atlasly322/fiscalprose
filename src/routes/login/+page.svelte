@@ -1,18 +1,39 @@
 <script lang="ts">
 	import { goto, invalidateAll } from '$app/navigation';
 	import { authClient } from '$lib/auth-client';
+	import Turnstile from '$lib/components/Turnstile.svelte';
 
 	let email = $state('');
 	let password = $state('');
+	let turnstileToken = $state('');
 	let errorMessage = $state('');
 	let loading = $state(false);
 
 	async function handleLogin(e: SubmitEvent) {
 		e.preventDefault();
 		errorMessage = '';
+
+		if (!turnstileToken) {
+			errorMessage = 'Please complete the verification.';
+			return;
+		}
+
 		loading = true;
 
 		try {
+			// Verify Turnstile token server-side first
+			const verifyRes = await fetch('/api/turnstile-verify', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ token: turnstileToken })
+			});
+
+			if (!verifyRes.ok) {
+				errorMessage = 'Verification failed. Please try again.';
+				loading = false;
+				return;
+			}
+
 			const result = await authClient.signIn.email({
 				email,
 				password,
@@ -25,10 +46,9 @@
 				return;
 			}
 
-			// Invalidate all server load functions so they pick up the new session
 			await invalidateAll();
 			goto('/admin');
-		} catch (e) {
+		} catch {
 			errorMessage = 'Something went wrong. Please try again.';
 			loading = false;
 		}
@@ -87,6 +107,11 @@
 				/>
 			</div>
 
+			<Turnstile
+				siteKey="0x4AAAAAACtuybpGCDUoqBhZ"
+				onverify={(token) => (turnstileToken = token)}
+			/>
+
 			{#if errorMessage}
 				<p
 					style="color:var(--rust);font-family:'DM Mono',monospace;font-size:0.75rem;text-align:center;"
@@ -99,7 +124,7 @@
 				type="submit"
 				class="btn-primary"
 				style="width:100%;text-align:center;"
-				disabled={loading}
+				disabled={loading || !turnstileToken}
 			>
 				{loading ? 'Signing in...' : 'Sign In'}
 			</button>
