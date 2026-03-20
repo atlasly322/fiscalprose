@@ -4,7 +4,8 @@ import { post } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params, platform }) => {
+export const load: PageServerLoad = async ({ params, platform, parent }) => {
+	const { config } = await parent();
 	const db = createDb(platform!.env.DB);
 
 	const article = await db
@@ -18,5 +19,5 @@ export const load: PageServerLoad = async ({ params, platform }) => {
 		error(404, 'Article not found');
 	}
 
-	return { article };
+	return { article, config };
 };

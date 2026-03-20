@@ -27,11 +27,11 @@
 </script>
 
 <svelte:head>
-	<title>{data.article.title} — FiscalProse</title>
+	<title>{data.article.title} — {data.config.siteTitle}{data.config.siteTitleAccent}</title>
 	<meta name="description" content={data.article.excerpt} />
 </svelte:head>
 
-<Masthead />
+<Masthead config={data.config} />
 
 <div class="page-wrapper">
 	<section>
@@ -44,7 +44,7 @@
 			<div class="article-body">
 				<h1>{data.article.title}</h1>
 				<div class="byline">
-					By <strong>Aman Verma</strong> &nbsp;·&nbsp; {data.article.category} &nbsp;·&nbsp; {data.article.readTime} &nbsp;·&nbsp; {formatDate(data.article.publishedAt)}
+					By <strong>{data.config.aboutName}</strong> &nbsp;·&nbsp; {data.article.category} &nbsp;·&nbsp; {data.article.readTime} &nbsp;·&nbsp; {formatDate(data.article.publishedAt)}
 				</div>
 				{@html data.article.content}
 			</div>
@@ -52,4 +52,4 @@
 	</section>
 </div>
 
-<Footer />
+<Footer config={data.config} />

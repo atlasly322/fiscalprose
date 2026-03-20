@@ -3,7 +3,8 @@ import { createDb } from '$lib/server/db';
 import { post } from '$lib/server/db/schema';
 import { eq, desc } from 'drizzle-orm';
 
-export const load: PageServerLoad = async ({ platform }) => {
+export const load: PageServerLoad = async ({ platform, parent }) => {
+	const { config } = await parent();
 	const db = createDb(platform!.env.DB);
 
 	const featuredPost = await db
@@ -26,5 +27,5 @@ export const load: PageServerLoad = async ({ platform }) => {
 		? recentPosts.filter((p) => p.id !== featuredPost.id).slice(0, 6)
 		: recentPosts.slice(0, 6);
 
-	return { featuredPost, gridPosts };
+	return { featuredPost, gridPosts, config };
 };

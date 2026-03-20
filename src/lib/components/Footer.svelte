@@ -1,3 +1,9 @@
+<script lang="ts">
+	import type { SiteConfig } from '$lib/site-config';
+
+	let { config }: { config: SiteConfig } = $props();
+</script>
+
 <footer class="site-footer">
-	&copy; {new Date().getFullYear()} FiscalProse — Aman Verma. All rights reserved.
+	&copy; {new Date().getFullYear()} {config.footerText}
 </footer>

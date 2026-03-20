@@ -23,6 +23,12 @@ export const post = sqliteTable('post', {
 		.$defaultFn(() => new Date())
 });
 
+// ── Site Config (single row, JSON blob) ──
+export const siteConfig = sqliteTable('site_config', {
+	id: integer('id').primaryKey().default(1),
+	data: text('data').notNull().default('{}')
+});
+
 // ── BetterAuth tables ──
 export const user = sqliteTable('user', {
 	id: text('id').primaryKey(),

@@ -34,6 +34,7 @@
 		>
 			<a href="/admin" style="color:#c8c0b4;text-decoration:none;">Dashboard</a>
 			<a href="/admin/write" style="color:#c8c0b4;text-decoration:none;">New Post</a>
+			<a href="/admin/settings" style="color:#c8c0b4;text-decoration:none;">Settings</a>
 			<span style="color:var(--muted);">{data.user.email}</span>
 			<button
 				onclick={handleSignOut}

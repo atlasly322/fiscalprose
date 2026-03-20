@@ -8,10 +8,10 @@
 	let { data } = $props();
 </script>
 
-<Masthead />
+<Masthead config={data.config} />
 
 {#if data.featuredPost}
-	<HeroArticle post={data.featuredPost} />
+	<HeroArticle post={data.featuredPost} config={data.config} />
 {/if}
 
 {#if data.gridPosts.length > 0}
@@ -41,5 +41,5 @@
 	</div>
 {/if}
 
-<AboutStrip />
-<Footer />
+<AboutStrip config={data.config} />
+<Footer config={data.config} />
