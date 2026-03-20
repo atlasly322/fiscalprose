@@ -2,8 +2,6 @@ import type { Actions, PageServerLoad } from './$types';
 import { createDb } from '$lib/server/db';
 import { post } from '$lib/server/db/schema';
 import { desc, eq } from 'drizzle-orm';
-import { createAuth } from '$lib/server/auth';
-import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ platform }) => {
 	const db = createDb(platform!.env.DB);
@@ -22,10 +20,5 @@ export const actions: Actions = {
 			await db.delete(post).where(eq(post.id, id));
 		}
 		return { success: true };
-	},
-	signOut: async ({ request, platform }) => {
-		const auth = createAuth(platform!.env.DB);
-		await auth.api.signOut({ headers: request.headers });
-		redirect(302, '/login');
 	}
 };
