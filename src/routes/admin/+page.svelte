@@ -52,7 +52,7 @@
 						{/if}
 					</td>
 					<td style="padding:0.8rem 0.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);">
-						{p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
+						{(p.publishedAt || p.createdAt) ? new Date((p.publishedAt || p.createdAt)!).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
 					</td>
 					<td style="padding:0.8rem 0.5rem;text-align:right;">
 						<a href="/admin/edit/{p.id}" style="color:var(--gold);font-family:'DM Mono',monospace;font-size:0.65rem;text-decoration:none;margin-right:1rem;">Edit</a>
