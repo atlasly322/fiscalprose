@@ -628,3 +628,140 @@ section {
 	letter-spacing: 0.5rem;
 	margin: 1rem 0;
 }
+
+/* ── RESPONSIVE — MOBILE ── */
+@media (max-width: 720px) {
+	/* Masthead */
+	.masthead {
+		padding: 0 1rem;
+	}
+
+	.masthead-top {
+		font-size: 0.6rem;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.masthead-main {
+		padding: 1.5rem 0 1rem;
+	}
+
+	.site-title {
+		font-size: 2.5rem;
+	}
+
+	.site-tagline {
+		font-size: 0.9rem;
+	}
+
+	header nav {
+		gap: 1.2rem;
+		font-size: 0.65rem;
+		padding: 0.7rem 0;
+	}
+
+	/* Layout */
+	.page-wrapper {
+		padding: 0 1rem;
+	}
+
+	section {
+		padding: 2.5rem 0;
+	}
+
+	/* Hero */
+	.hero {
+		gap: 1.5rem;
+		padding-bottom: 2rem;
+	}
+
+	.hero h2 {
+		font-size: 1.5rem;
+	}
+
+	.hero-excerpt {
+		font-size: 0.95rem;
+	}
+
+	.hero-visual {
+		padding: 1.5rem;
+	}
+
+	.hero-visual::before {
+		display: none;
+	}
+
+	.stat-grid {
+		gap: 1rem;
+	}
+
+	.stat-number {
+		font-size: 1.5rem;
+	}
+
+	/* Article grid */
+	.article-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	/* About strip */
+	.about-strip {
+		padding: 2.5rem 1rem;
+	}
+
+	.about-name {
+		font-size: 1.6rem;
+	}
+
+	/* Article body */
+	.article-body h1 {
+		font-size: 1.5rem;
+	}
+
+	.article-body .lead {
+		font-size: 1.05rem;
+		padding-left: 1rem;
+	}
+
+	.article-body .pullquote {
+		font-size: 1.1rem;
+		padding: 1rem 1.2rem;
+	}
+
+	.info-box {
+		padding: 1rem;
+	}
+
+	/* CTA */
+	.cta-section {
+		padding: 2.5rem 1rem;
+	}
+
+	.cta-section h2 {
+		font-size: 1.6rem;
+	}
+
+	/* Buttons */
+	.btn-primary,
+	.btn-outline {
+		padding: 0.75rem 1.5rem;
+		font-size: 0.65rem;
+		display: block;
+		text-align: center;
+		margin: 0.3rem 0;
+	}
+}
+
+/* ── RESPONSIVE — TABLET ── */
+@media (max-width: 960px) and (min-width: 721px) {
+	.about-inner {
+		grid-template-columns: 1fr 1.5fr !important;
+	}
+
+	.stat-number {
+		font-size: 1.6rem;
+	}
+}
