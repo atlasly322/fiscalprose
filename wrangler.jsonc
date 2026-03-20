@@ -1,0 +1,21 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "fiscalprose",
+	"compatibility_date": "2026-03-20",
+	"compatibility_flags": ["nodejs_als"],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "fiscalprose-db",
+			"database_id": "9be5d308-40db-43d1-80bb-93dc97ee9f5d",
+			"migrations_dir": "./drizzle"
+		}
+	],
+	"workers_dev": true,
+	"preview_urls": true
+}
