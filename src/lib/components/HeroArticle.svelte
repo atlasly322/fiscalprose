@@ -10,6 +10,15 @@
 		if (!date) return '';
 		return new Date(date).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
 	}
+
+	function getReadingStats(p: Post) {
+		const words = p.wordCount;
+		const mins = p.readTime;
+		const pages = Math.max(1, Math.round(words / 300));
+		return { words, mins, pages };
+	}
+
+	const stats = $derived(getReadingStats(heroPost));
 </script>
 
 <div class="page-wrapper">
@@ -17,34 +26,39 @@
 		<p class="section-label">Featured Work</p>
 		<div class="hero animate delay-2">
 			<div class="hero-text">
-				<span class="hero-badge">&#10022; Cover Story</span>
-				<h2><a href="/blog/{heroPost.slug}" style="text-decoration:none;color:inherit;">{heroPost.title}</a></h2>
+				<span class="hero-badge">&#10022; Featured</span>
+				<h2>
+					<a href="/blog/{heroPost.slug}" style="text-decoration:none;color:inherit;"
+						>{heroPost.title}</a
+					>
+				</h2>
 				<p class="hero-excerpt">{heroPost.excerpt}</p>
 				<p class="hero-meta">
-					<strong>{heroPost.category}</strong> &nbsp;·&nbsp; {heroPost.wordCount.toLocaleString()} words &nbsp;·&nbsp; ⊙ {heroPost.readTime} &nbsp;·&nbsp; {formatDate(heroPost.publishedAt)}
+					<strong>{heroPost.category}</strong> &nbsp;·&nbsp; {heroPost.wordCount.toLocaleString()} words
+					&nbsp;·&nbsp; ⊙ {heroPost.readTime} &nbsp;·&nbsp; {formatDate(heroPost.publishedAt)}
 				</p>
 			</div>
 			<div class="hero-visual animate delay-3">
 				<div class="stat-grid">
 					<div class="stat-item">
-						<div class="stat-number">11Cr+</div>
-						<div class="stat-label">Demat Accounts</div>
-						<div class="stat-context">As of Feb 2025, a 3× increase from 2019</div>
+						<div class="stat-number">{stats.words.toLocaleString()}</div>
+						<div class="stat-label">Words</div>
+						<div class="stat-context">Carefully researched & written</div>
 					</div>
 					<div class="stat-item">
-						<div class="stat-number">₹21L Cr</div>
-						<div class="stat-label">SIP AUM</div>
-						<div class="stat-context">Record inflows into mutual funds</div>
+						<div class="stat-number">{stats.mins}</div>
+						<div class="stat-label">Read Time</div>
+						<div class="stat-context">At a comfortable pace</div>
 					</div>
 					<div class="stat-item">
-						<div class="stat-number">6.2%</div>
-						<div class="stat-label">Savings Rate Drop</div>
-						<div class="stat-context">Households shifting from FDs to equities</div>
+						<div class="stat-number">{heroPost.category.split(' ')[0]}</div>
+						<div class="stat-label">Category</div>
+						<div class="stat-context">{heroPost.category}</div>
 					</div>
 					<div class="stat-item">
-						<div class="stat-number">₹22,000+</div>
-						<div class="stat-label">Avg Monthly SIP</div>
-						<div class="stat-context">Crossed ₹25,000 Cr in Jan 2025</div>
+						<div class="stat-number">{formatDate(heroPost.publishedAt)}</div>
+						<div class="stat-label">Published</div>
+						<div class="stat-context">Original analysis</div>
 					</div>
 				</div>
 			</div>
